@@ -87,10 +87,45 @@ void labinit(void) {
 
     return;
 }
+void set_line(int* gamestate, int line){
+	char row[3];
+	int i;
+	for(i = 0; i < line; i++) gamestate++;
+	for(i = 0; i < 3; i++){
+		
+		switch (*gamestate){
+		case 0 :
+		row[i] = '_';
+		break;
+		case 1 :
+		row[i] = 'X';
+		break;
+		case 2 :
+		row[i] = 'O';
+		break;
+		}
+		gamestate++;
+		gamestate++;
+		gamestate++;
+	}
+	return;
+	
+}
+void update_gamestate(int* gamestate){
+	int line = 0;
+	set_line(gamestate, line);
+	line++;
+	set_line(gamestate, line);
+	line++;
+	set_line(gamestate, line);
+	display_update();
+
+}
+
 /* This function is called repetitively from the main program */
 void labwork(void) {
   
-	while(1){
+	/*while(1){
     // put the if statements testing the switches here, make it hierarcichal
 	if (getsw() == 2) {
 	
@@ -107,16 +142,20 @@ void labwork(void) {
 			}
 		}
 	if (getbtns() == 1) {
+		//char = 'O';
 		
 	}
 	else if (getbtns() == 2) {
+		//char ='X';
 		
 	}
 	else if (getbtns() == 3) {
 		
-	}
+	}*/
+	int gamestate[] = {0,1,2,0,1,0,0,2,1};
+	update_gamestate(gamestate);
 
-	}
+	
 
     
     
