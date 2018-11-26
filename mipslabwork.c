@@ -165,7 +165,7 @@ void labwork(void) {
 	
 	update_gamestate(gamestate);
 
-	
+	delay(1000);
 
     
     
