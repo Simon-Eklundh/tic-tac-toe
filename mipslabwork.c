@@ -87,13 +87,13 @@ void labinit(void) {
 
     return;
 }
-void set_line(int* gamestate, int line){
+void set_line(int gamestate[], int line){
 	char row[3];
 	int i;
-	for(i = 0; i < line; i++) gamestate++;
+	//for(i = 0; i < line; i++) gamestate++;
 	for(i = 0; i < 3; i++){
 		
-		switch (*gamestate){
+		switch (gamestate[i]){
 		case 0 :
 		row[i] = '_';
 		break;
@@ -103,15 +103,15 @@ void set_line(int* gamestate, int line){
 		case 2 :
 		row[i] = 'O';
 		break;
+		
 		}
-		gamestate++;
-		gamestate++;
-		gamestate++;
 	}
+	char theline[] = {row[0], '|', row[1], '|', row[2]};
+	display_string(line, theline);
 	return;
 	
 }
-void update_gamestate(int* gamestate){
+void update_gamestate(int gamestate[]){
 	int line = 0;
 	set_line(gamestate, line);
 	line++;
@@ -152,7 +152,17 @@ void labwork(void) {
 	else if (getbtns() == 3) {
 		
 	}*/
-	int gamestate[] = {0,1,2,0,1,0,0,2,1};
+	
+	int gamestate[9];
+	int j = 0;
+	int i;
+	for(i = 0; i < 9; i++){
+		gamestate[i] = j;
+		j++;
+		if (j == 3) j = 0;
+	}
+	
+	
 	update_gamestate(gamestate);
 
 	
