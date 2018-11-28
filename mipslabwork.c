@@ -22,6 +22,8 @@
 #define DISPLAY_RESET_PORT PORTG
 #define DISPLAY_RESET_MASK 0x200
 
+//global variables
+
 int mytime = 0x0;
 void light(void) {
     static int counter = 1;
@@ -90,26 +92,74 @@ void labinit(void) {
 void set_line(int gamestate[], int line){
 	char row[3];
 	int i;
-	//for(i = 0; i < line; i++) gamestate++;
+	int j = (3*line);
+	
 	for(i = 0; i < 3; i++){
 		
-		switch (gamestate[i]){
+		switch (gamestate[j]){
 		case 0 :
 		row[i] = '_';
 		break;
 		case 1 :
-		row[i] = 'X';
+		row[i] = 'x';
 		break;
 		case 2 :
-		row[i] = 'O';
+		row[i] = 'o';
 		break;
 		
 		}
+		j++;
 	}
+
 	char theline[] = {row[0], '|', row[1], '|', row[2]};
 	display_string(line, theline);
+	
 	return;
 	
+}
+display_winner(int winner){
+	if(winner == 1) display_string(3, "the winner was x");
+	else if(winner == 2) display_string(3, "the winner was o");
+
+
+}
+
+void col(int gamestate[]){
+	int i;
+	for( i = 0; i < 3; i++){
+		if(gamestate[i] == 0) continue;
+		if(gamestate[i] == gamestate[i+3] && gamestate[i] == gamestate[i+6]){
+			display_winner(gamestate[i]);
+		
+			
+		}
+	}
+	
+}
+void row(int gamestate[]){
+	int i;
+	for( i = 0; i < 7; i+=3){
+		if(gamestate[i] == 0) continue;
+		if(gamestate[i] == gamestate[i++] && gamestate[i] == gamestate[i+2]){
+			display_winner(gamestate[i]);
+			
+			
+		}
+	}
+	
+}
+void diag(int gamestate[]){
+	// left diagonal
+		if(gamestate[0] == gamestate[4] && gamestate[0] == gamestate[8]) display_winner(gamestate[0]);
+		
+		else if(gamestate[2] == gamestate[4] && gamestate[2] == gamestate[6]) display_winner(gamestate[2]);
+	
+}
+
+void is_game_won(int gamestate[]){
+	col(gamestate);
+	row(gamestate);
+	diag(gamestate);
 }
 void update_gamestate(int gamestate[]){
 	int line = 0;
@@ -118,61 +168,35 @@ void update_gamestate(int gamestate[]){
 	set_line(gamestate, line);
 	line++;
 	set_line(gamestate, line);
-	display_update();
+	
 
 }
 
 /* This function is called repetitively from the main program */
 void labwork(void) {
   
-	/*while(1){
-    // put the if statements testing the switches here, make it hierarcichal
-	if (getsw() == 2) {
-	
-	}
-	else if (getsw() == 4) {
-	
-	}
-	else if (getsw() == 8) {
-		
-	}
-	else if (getsw() == 1) {
-		while (getsw() == 1){
-
-			}
-		}
-	if (getbtns() == 1) {
-		//char = 'O';
-		
-	}
-	else if (getbtns() == 2) {
-		//char ='X';
-		
-	}
-	else if (getbtns() == 3) {
-		
-	}*/
 	
 	int gamestate[9];
-	int j = 0;
+	int j = 2;
 	int i;
 	for(i = 0; i < 9; i++){
 		gamestate[i] = j;
-		j++;
-		if (j == 3) j = 0;
+		j--;
+		if (j < 0) j = 2;
 	}
 	
 	
 	update_gamestate(gamestate);
-
+	
 	delay(1000);
+	
+	
+    is_game_won(gamestate);
+    
+    
+ 
 
-    
-    
-    
-    
-
-   
+   display_update();
 
 
 
