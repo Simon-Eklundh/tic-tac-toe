@@ -23,7 +23,9 @@
 #define DISPLAY_RESET_MASK 0x200
 
 //global variables
-
+int row = 1;
+int user = 1;
+char userchar = 'X';
 int mytime = 0x0;
 void light(void) {
     static int counter = 1;
@@ -124,7 +126,7 @@ display_winner(int winner){
 
 }
 
-void col(int gamestate[]){
+void colwin(int gamestate[]){
 	int i;
 	for( i = 0; i < 3; i++){
 		if(gamestate[i] == 0) continue;
@@ -136,7 +138,7 @@ void col(int gamestate[]){
 	}
 	
 }
-void row(int gamestate[]){
+void rowwin(int gamestate[]){
 	int i;
 	for( i = 0; i < 7; i+=3){
 		if(gamestate[i] == 0) continue;
@@ -148,7 +150,7 @@ void row(int gamestate[]){
 	}
 	
 }
-void diag(int gamestate[]){
+void diagwin(int gamestate[]){
 	// left diagonal
 		if(gamestate[0] == gamestate[4] && gamestate[0] == gamestate[8]) display_winner(gamestate[0]);
 		
@@ -157,9 +159,9 @@ void diag(int gamestate[]){
 }
 
 void is_game_won(int gamestate[]){
-	col(gamestate);
-	row(gamestate);
-	diag(gamestate);
+	colwin(gamestate);
+	rowwin(gamestate);
+	diagwin(gamestate);
 }
 void update_gamestate(int gamestate[]){
 	int line = 0;
@@ -176,15 +178,34 @@ void update_gamestate(int gamestate[]){
 void labwork(void) {
   
 	
-	int gamestate[9];
+	static int gamestate[9];
 	int j = 2;
 	int i;
+	int array_exists = 0;
+	for(i = 0; i<9; i++){
+		if(gamestate[i] != 0){ 
+		array_exists = 1;
+		break;
+		}
+	
+	if(!array_exists){
 	for(i = 0; i < 9; i++){
 		gamestate[i] = j;
 		j--;
 		if (j < 0) j = 2;
+	}}
+	int test = user;
+	row = 1;
+	int testrow = row;
+	char out = "row: 1 player: " + userchar;
+	display_string(3 , out);
+	while(1){
+		if(therow != row){
+			char string [] = "row: " + row + "player: " + userchar;
+			display_string(3, string);
+			}
+			if( test != user) break;
 	}
-	
 	
 	update_gamestate(gamestate);
 	
