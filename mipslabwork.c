@@ -122,46 +122,55 @@ void set_line(int gamestate[], int line){
 display_winner(int winner){
 	if(winner == 1) display_string(3, "the winner was x");
 	else if(winner == 2) display_string(3, "the winner was o");
-
+	else display_string(3, "draw");
 
 }
 
-void colwin(int gamestate[]){
+int colwin(int gamestate[]){
 	int i;
 	for( i = 0; i < 3; i++){
 		if(gamestate[i] == 0) continue;
 		if(gamestate[i] == gamestate[i+3] && gamestate[i] == gamestate[i+6]){
 			display_winner(gamestate[i]);
+			return 1;
+
 		
 			
 		}
 	}
-	
+	return 0;
 }
-void rowwin(int gamestate[]){
+int rowwin(int gamestate[]){
 	int i;
 	for( i = 0; i < 7; i+=3){
 		if(gamestate[i] == 0) continue;
 		if(gamestate[i] == gamestate[i++] && gamestate[i] == gamestate[i+2]){
 			display_winner(gamestate[i]);
+			return 1;
 			
 			
 		}
 	}
-	
+	return 0;
 }
-void diagwin(int gamestate[]){
+int diagwin(int gamestate[]){
 	// left diagonal
-		if(gamestate[0] == gamestate[4] && gamestate[0] == gamestate[8]) display_winner(gamestate[0]);
+		if(gamestate[0] == gamestate[4] && gamestate[0] == gamestate[8]){
+			display_winner(gamestate[0]);
+		return 1;}
 		
-		else if(gamestate[2] == gamestate[4] && gamestate[2] == gamestate[6]) display_winner(gamestate[2]);
+		else if(gamestate[2] == gamestate[4] && gamestate[2] == gamestate[6]) {
+			display_winner(gamestate[2]);
+		return 1;}
+		return 0;
 	
 }
 
 void is_game_won(int gamestate[]){
-	colwin(gamestate);
-	rowwin(gamestate);
-	diagwin(gamestate);
+	if(colwin(gamestate))return 1;
+	else if(rowwin(gamestate)) return 1;
+	else if(diagwin(gamestate)) return 1;
+	else: return 0;
 }
 void update_gamestate(int gamestate[]){
 	int line = 0;
@@ -173,11 +182,38 @@ void update_gamestate(int gamestate[]){
 	
 
 }
+char[] create_out(){
+	char out[];
+	if(user = 1){
+		switch (row){
+			case 1 :
+			out = "row: 1 player: 1";
+			break;
+			case 2 :
+			out = "row: 2 player: 1";
+			break;
+			case 3 :
+			out = "row: 3 player: 1";
+			break;
+		}
+	}
+	else if(user = 2){
+		switch (row){
+			case 1 :
+			out = "row: 1 player: 2";
+			break;
+			case 2 :
+			out = "row: 2 player: 2";
+			break;
+			case 3 :
+			out = "row: 3 player: 2";
+			break;
+		}
 
 /* This function is called repetitively from the main program */
 void labwork(void) {
   
-	
+	static int rounds = 0;
 	static int gamestate[9];
 	int j = 2;
 	int i;
@@ -197,12 +233,12 @@ void labwork(void) {
 	int test = user;
 	row = 1;
 	int testrow = row;
-	char out = "row: 1 player: " + userchar;
+	char out[] = create_out();
 	display_string(3 , out);
 	while(1){
 		if(therow != row){
-			char string [] = "row: " + row + "player: " + userchar;
-			display_string(3, string);
+			out = create_out();
+			display_string(3, out);
 			}
 			if( test != user) break;
 	}
@@ -213,6 +249,8 @@ void labwork(void) {
 	
 	
     is_game_won(gamestate);
+	if(rounds == 9 && is_game_won(gamestate);)
+		display_winner(0);
     
     
  
@@ -220,7 +258,7 @@ void labwork(void) {
    display_update();
 
 
-
+	rounds++;
 
     return;
 
