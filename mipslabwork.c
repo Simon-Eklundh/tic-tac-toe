@@ -23,6 +23,7 @@
 #define DISPLAY_RESET_MASK 0x200
 
 //global variables
+int gamestate[9];
 int row = 1;
 int user = 1;
 char userchar = 'X';
@@ -76,6 +77,8 @@ void set_temp(number, numstring){
 	time = numstring;
 }*/
 /* Lab-specific initialization goes here */
+
+
 void labinit(void) {
     volatile int *pointer = (volatile int *) 0xbf886110;
     int mask = 0xFF;
@@ -91,6 +94,8 @@ void labinit(void) {
 
     return;
 }
+
+
 void set_line(int gamestate[], int line){
 	char row[3];
 	int i;
@@ -117,7 +122,7 @@ void set_line(int gamestate[], int line){
 	display_string(line, theline);
 	
 	return;
-	
+
 }
 display_winner(int winner){
 	if(winner == 1) display_string(3, "the winner was x");
@@ -166,11 +171,11 @@ int diagwin(int gamestate[]){
 	
 }
 
-void is_game_won(int gamestate[]){
+int is_game_won(int gamestate[]){
 	if(colwin(gamestate))return 1;
 	else if(rowwin(gamestate)) return 1;
 	else if(diagwin(gamestate)) return 1;
-	else: return 0;
+	else return 0;
 }
 void update_gamestate(int gamestate[]){
 	int line = 0;
@@ -180,68 +185,90 @@ void update_gamestate(int gamestate[]){
 	line++;
 	set_line(gamestate, line);
 	
-
+	
 }
-char[] create_out(){
-	char out[];
+char* create_out(){
+	
 	if(user = 1){
-		switch (row){
-			case 1 :
-			out = "row: 1 player: 1";
-			break;
-			case 2 :
-			out = "row: 2 player: 1";
-			break;
-			case 3 :
-			out = "row: 3 player: 1";
-			break;
-		}
+		if(row == 1){static char out[] = "row: 1 player: 1"; return out;}
+		else if(row == 2){ static char out[] = "row: 2 player: 1";return out;}
+	else if(row == 3) {static char out[] = "row: 3 player: 1";return out;}
+		
 	}
 	else if(user = 2){
-		switch (row){
-			case 1 :
-			out = "row: 1 player: 2";
-			break;
-			case 2 :
-			out = "row: 2 player: 2";
-			break;
-			case 3 :
-			out = "row: 3 player: 2";
-			break;
-		}
-
+		if(row == 1){static char out[] = "row: 1 player: 2";return out;}
+		else if(row == 2) {static char out[] = "row: 2 player: 2";return out;}
+	else if(row == 3){ static char out[] = "row: 3 player: 2";return out;}
+	
+	}
+	
+		
+}
 /* This function is called repetitively from the main program */
+
+
+
 void labwork(void) {
   
 	static int rounds = 0;
-	static int gamestate[9];
-	int j = 2;
-	int i;
-	int array_exists = 0;
-	for(i = 0; i<9; i++){
-		if(gamestate[i] != 0){ 
-		array_exists = 1;
-		break;
-		}
 	
-	if(!array_exists){
-	for(i = 0; i < 9; i++){
-		gamestate[i] = j;
-		j--;
-		if (j < 0) j = 2;
-	}}
-	int test = user;
-	row = 1;
-	int testrow = row;
-	char out[] = create_out();
+	
+	char *out = create_out();
 	display_string(3 , out);
-	while(1){
-		if(therow != row){
-			out = create_out();
-			display_string(3, out);
+	while(1){	
+		if (getsw() == 8) {
+			row == 1;
+			if (getbtns() == 8){
+				gamestate[0] ;
 			}
-			if( test != user) break;
+			if (getbtns() == 4){
+				gamestate [1];
+			}
+			if (getbtns() == 2) {
+				gamestate [2];
+			}
+			
+		display_string (3, "Row 1");	
+		display_update();
+			
+		}
+		if (getsw() == 4) {
+			row = 2;
+			
+			if (getbtns() == 8){
+				gamestate[3];
+			}
+			if (getbtns() == 4){
+				gamestate[4];
+			}
+			if (getbtns() == 2) {
+				gamestate[5];
+			}
+			
+			display_string (3, "Row 2");
+			display_update();
+		}
+		if (getsw() == 2) {
+			row == 3;
+			if (getbtns() == 8){
+				gamestate[6];
+			}
+			if (getbtns() == 4){
+				gamestate[7];
+			}
+			if (getbtns() == 2) {
+				gamestate[8];
+			}
+			display_string (3, "Row 3");
+			display_update();
+		}
+		
+		
+		//if(getbts){
+			// array[row-1*3 + button] = user;
+           			
 	}
+	
 	
 	update_gamestate(gamestate);
 	
@@ -249,7 +276,7 @@ void labwork(void) {
 	
 	
     is_game_won(gamestate);
-	if(rounds == 9 && is_game_won(gamestate);)
+	if(rounds == 9 && !is_game_won(gamestate))
 		display_winner(0);
     
     
@@ -259,6 +286,8 @@ void labwork(void) {
 
 
 	rounds++;
+	if(user == 1) user = 2;
+	else if(user == 2) user = 1;
 
     return;
 
