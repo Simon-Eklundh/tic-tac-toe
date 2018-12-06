@@ -6,7 +6,7 @@
 
 
 void preset_gameboard(void){
-	display_string(0, "welcome to");
+	/*display_string(0, "welcome to");
 	display_string(1, "tic tac toe");
 	display_string(2, "mate");
 	display_update();
@@ -29,5 +29,5 @@ void preset_gameboard(void){
 	display_string( 2 , " | | ");
 	display_string(3 , "row: 1 player: X");
 	display_update();
-	
+	*/
 }

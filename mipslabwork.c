@@ -26,7 +26,6 @@
 int gamestate[9];
 int row = 1;
 int user = 1;
-char userchar = 'X';
 int mytime = 0x0;
 void light(void) {
     static int counter = 1;
@@ -127,7 +126,7 @@ void set_line(int gamestate[], int line){
 display_winner(int winner){
 	if(winner == 1) display_string(3, "the winner was x");
 	else if(winner == 2) display_string(3, "the winner was o");
-	//else display_string(3, "draw");
+	else display_string(3, "draw");
 	delay(10000);
 
 }
@@ -212,23 +211,7 @@ void update_gamestate(int gamestate[]){
 	
 	
 }
-char* create_out(){
-	
-	if(user == 1){
-		if(row == 1){static char out[] = "row: 1 player: 1"; return out;}
-		else if(row == 2){ static char out[] = "row: 2 player: 1";return out;}
-	else if(row == 3) {static char out[] = "row: 3 player: 1";return out;}
-		
-	}
-	else if(user == 2){
-		if(row == 1){static char out[] = "row: 1 player: 2";return out;}
-		else if(row == 2) {static char out[] = "row: 2 player: 2";return out;}
-	else if(row == 3){ static char out[] = "row: 3 player: 2";return out;}
-	
-	}
-	
-		
-}
+
 /* This function is called repetitively from the main program */
 
 
@@ -241,22 +224,22 @@ void labwork(void) {
 			if (getbtns() == 4){
 				if (!gamestate[0]){
 					gamestate[0] = user;
-				broken++;
-				break;
+					broken++;
+					break;
 				}
 			}
 			if (getbtns() == 2){
 				if (!gamestate[1]){
 					gamestate[1] = user;
-				broken++;
-				break;
+					broken++;
+					break;
 				}
 			}
 			if (getbtns() == 1) {
 				if (!gamestate[2]) {
 					gamestate[2] = user;
-				broken++;
-				break;
+					broken++;
+					break;
 				}
 			}
 			
@@ -271,22 +254,22 @@ void labwork(void) {
 			if (getbtns() == 4){
 				if (!gamestate[3]){
 					gamestate[3] = user;
-				broken++;
-				break;
+					broken++;
+					break;
 				}
 			}
 			if (getbtns() == 2){
 				if (!gamestate[4]){
 					gamestate[4] = user;
-				broken++;
-				break;
+					broken++;
+					break;
 				}
 			}
 			if (getbtns() == 1) {
 				if (!gamestate[5]){
-				gamestate[5] = user;
-				broken++;
-				break;
+					gamestate[5] = user;
+					broken++;
+					break;
 				}
 			}
 			
@@ -297,20 +280,25 @@ void labwork(void) {
 	//	if(!gamestate[i]) gamestate[i] = user;
 		if (getsw() == 2) {
 			row == 3;
+			
 			if (getbtns() == 4){
-				if (!gamestate[6]) gamestate[6] = user;
+				if (!gamestate[6]){ gamestate[6] = user;
 				broken++;
+			
 				break;
+				}
 			}
 			if (getbtns() == 2){
-				if (!gamestate[7]) gamestate[7] = user;
+				if (!gamestate[7]) {gamestate[7] = user;
 				broken++;
 				break;
+				}
 			}
 			if (getbtns() == 1) {
-				if (!gamestate[8]) gamestate[8] = user;
+				if (!gamestate[8]){ gamestate[8] = user;
 				broken++;
 				break;
+				}
 			}
 			display_string (3, "Row 3");
 			display_update();
@@ -328,8 +316,10 @@ void labwork(void) {
 			// array[row-1*3 + button] = user;
            	
 	}
-	
-	
+	if(user == 1) user = 2;
+	else if(user == 2) user = 1;
+	//display_debug(&user);
+	delay(100);
 	update_gamestate(gamestate);
 	
 	//delay(100);
@@ -346,8 +336,7 @@ void labwork(void) {
 
    display_update();
 
-	if(user == 1) user = 2;
-	else if(user == 2) user = 1;
+	
 
     return;
 
