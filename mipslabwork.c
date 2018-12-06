@@ -136,7 +136,7 @@ int colwin(int gamestate[]){
 	int i;
 	for( i = 0; i < 3; i++){
 		if(gamestate[i] == 0) continue;
-		if(gamestate[i] == gamestate[i+3] && gamestate[i] == gamestate[i+6]){
+		else if(gamestate[i] == gamestate[i+3] && gamestate[i] == gamestate[i+6]){
 			display_winner(gamestate[i]);
 			return 1;
 
@@ -150,7 +150,7 @@ int rowwin(int gamestate[]){
 	int i;
 	for( i = 0; i < 7; i+=3){
 		if(gamestate[i] == 0) continue;
-		if(gamestate[i] == gamestate[i++] && gamestate[i] == gamestate[i+2]){
+		else if(gamestate[i] == gamestate[i+1] && gamestate[i] == gamestate[i+2]){
 			display_winner(gamestate[i]);
 			return 1;
 			
@@ -180,13 +180,21 @@ int diagwin(int gamestate[]){
 
 int is_game_won(int gamestate[]){
 	int i;
-	for (i=0; i<9; i++){
-	if (!gamestate[i]) break;
+	int count = 0;
+	for (i=0;i<9; i++){
+	if (!gamestate[i]) {
+		count = 0;
+		break;
+	}
+	else count = 1;
 	}	
-	if(i == 9) {display_winner(42); delay(10000);}
+	
 	if(colwin(gamestate))return 1;
 	else if(rowwin(gamestate)) return 1;
 	else if(diagwin(gamestate)) return 1;
+	else if(count == 1) {display_winner(42); delay(10000);}
+	
+	
 	else return 0;
 	
 	
