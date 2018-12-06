@@ -117,7 +117,7 @@ void set_line(int gamestate[], int line){
 		}
 		j++;
 	}
-
+	
 	char theline[] = {row[0], '|', row[1], '|', row[2]};
 	display_string(line, theline);
 	
@@ -127,7 +127,8 @@ void set_line(int gamestate[], int line){
 display_winner(int winner){
 	if(winner == 1) display_string(3, "the winner was x");
 	else if(winner == 2) display_string(3, "the winner was o");
-	else display_string(3, "draw");
+	//else display_string(3, "draw");
+	delay(10000);
 
 }
 
@@ -159,23 +160,39 @@ int rowwin(int gamestate[]){
 	return 0;
 }
 int diagwin(int gamestate[]){
-	// left diagonal
+	
+	
+		if(gamestate[0] == 0 || gamestate[2] == 0) return 0;
 		if(gamestate[0] == gamestate[4] && gamestate[0] == gamestate[8]){
+			
 			display_winner(gamestate[0]);
 		return 1;}
 		
-		else if(gamestate[2] == gamestate[4] && gamestate[2] == gamestate[6]) {
+		else if(gamestate[2] == gamestate[4] && gamestate[2] == gamestate[6])
+			{
 			display_winner(gamestate[2]);
 		return 1;}
+		
+		
 		return 0;
 	
 }
 
 int is_game_won(int gamestate[]){
+	int i;
+	for (i=0; i<9; i++){
+	if (!gamestate[i]) break;
+	}	
+	if(i == 9) {display_winner(42); delay(10000);}
 	if(colwin(gamestate))return 1;
 	else if(rowwin(gamestate)) return 1;
 	else if(diagwin(gamestate)) return 1;
 	else return 0;
+	
+	
+
+	
+	
 }
 void update_gamestate(int gamestate[]){
 	int line = 0;
@@ -189,13 +206,13 @@ void update_gamestate(int gamestate[]){
 }
 char* create_out(){
 	
-	if(user = 1){
+	if(user == 1){
 		if(row == 1){static char out[] = "row: 1 player: 1"; return out;}
 		else if(row == 2){ static char out[] = "row: 2 player: 1";return out;}
 	else if(row == 3) {static char out[] = "row: 3 player: 1";return out;}
 		
 	}
-	else if(user = 2){
+	else if(user == 2){
 		if(row == 1){static char out[] = "row: 1 player: 2";return out;}
 		else if(row == 2) {static char out[] = "row: 2 player: 2";return out;}
 	else if(row == 3){ static char out[] = "row: 3 player: 2";return out;}
@@ -209,83 +226,118 @@ char* create_out(){
 
 
 void labwork(void) {
-  
-	static int rounds = 0;
-	
-	
-	char *out = create_out();
-	display_string(3 , out);
+	int broken = 0;
 	while(1){	
 		if (getsw() == 8) {
 			row == 1;
-			if (getbtns() == 8){
-				gamestate[0] ;
-			}
 			if (getbtns() == 4){
-				gamestate [1];
+				if (!gamestate[0]){
+					gamestate[0] = user;
+				broken++;
+				break;
+				}
 			}
-			if (getbtns() == 2) {
-				gamestate [2];
+			if (getbtns() == 2){
+				if (!gamestate[1]){
+					gamestate[1] = user;
+				broken++;
+				break;
+				}
+			}
+			if (getbtns() == 1) {
+				if (!gamestate[2]) {
+					gamestate[2] = user;
+				broken++;
+				break;
+				}
 			}
 			
 		display_string (3, "Row 1");	
 		display_update();
+		delay(100);
 			
 		}
 		if (getsw() == 4) {
 			row = 2;
 			
-			if (getbtns() == 8){
-				gamestate[3];
-			}
 			if (getbtns() == 4){
-				gamestate[4];
+				if (!gamestate[3]){
+					gamestate[3] = user;
+				broken++;
+				break;
+				}
 			}
-			if (getbtns() == 2) {
-				gamestate[5];
+			if (getbtns() == 2){
+				if (!gamestate[4]){
+					gamestate[4] = user;
+				broken++;
+				break;
+				}
+			}
+			if (getbtns() == 1) {
+				if (!gamestate[5]){
+				gamestate[5] = user;
+				broken++;
+				break;
+				}
 			}
 			
 			display_string (3, "Row 2");
 			display_update();
+			delay(100);
 		}
+	//	if(!gamestate[i]) gamestate[i] = user;
 		if (getsw() == 2) {
 			row == 3;
-			if (getbtns() == 8){
-				gamestate[6];
-			}
 			if (getbtns() == 4){
-				gamestate[7];
+				if (!gamestate[6]) gamestate[6] = user;
+				broken++;
+				break;
 			}
-			if (getbtns() == 2) {
-				gamestate[8];
+			if (getbtns() == 2){
+				if (!gamestate[7]) gamestate[7] = user;
+				broken++;
+				break;
+			}
+			if (getbtns() == 1) {
+				if (!gamestate[8]) gamestate[8] = user;
+				broken++;
+				break;
 			}
 			display_string (3, "Row 3");
 			display_update();
+			delay(100);
+			
 		}
 		
-		
+		if(broken){
+			broken = 0;
+			
+			//delay(1000);
+			break;
+		}
 		//if(getbts){
 			// array[row-1*3 + button] = user;
-           			
+           	
 	}
 	
 	
 	update_gamestate(gamestate);
 	
-	delay(1000);
+	//delay(100);
 	
-	
-    is_game_won(gamestate);
-	if(rounds == 9 && !is_game_won(gamestate))
-		display_winner(0);
+	/* if(is_game_won(gamestate)){
+		while(1){
+	}} */
+	is_game_won(gamestate);
+	//if(rounds == 9 && !is_game_won(gamestate))
+	//	display_winner(3);
     
     
- 
+	
 
    display_update();
 
-
-	rounds++;
 	if(user == 1) user = 2;
 	else if(user == 2) user = 1;
 
