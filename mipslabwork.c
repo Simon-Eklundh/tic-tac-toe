@@ -228,14 +228,14 @@ void labwork(void) {
 					break;
 				}
 			}
-			if (getbtns() == 2){
+			else if (getbtns() == 2){
 				if (!gamestate[1]){
 					gamestate[1] = user;
 					broken++;
 					break;
 				}
 			}
-			if (getbtns() == 1) {
+			else if (getbtns() == 1) {
 				if (!gamestate[2]) {
 					gamestate[2] = user;
 					broken++;
@@ -248,7 +248,7 @@ void labwork(void) {
 		delay(100);
 			
 		}
-		if (getsw() == 4) {
+		else if (getsw() == 4) {
 			row = 2;
 			
 			if (getbtns() == 4){
@@ -258,14 +258,14 @@ void labwork(void) {
 					break;
 				}
 			}
-			if (getbtns() == 2){
+			else if (getbtns() == 2){
 				if (!gamestate[4]){
 					gamestate[4] = user;
 					broken++;
 					break;
 				}
 			}
-			if (getbtns() == 1) {
+			else if (getbtns() == 1) {
 				if (!gamestate[5]){
 					gamestate[5] = user;
 					broken++;
@@ -278,7 +278,7 @@ void labwork(void) {
 			delay(100);
 		}
 	//	if(!gamestate[i]) gamestate[i] = user;
-		if (getsw() == 2) {
+		else if (getsw() == 2) {
 			row == 3;
 			
 			if (getbtns() == 4){
@@ -288,13 +288,13 @@ void labwork(void) {
 				break;
 				}
 			}
-			if (getbtns() == 2){
+			else if (getbtns() == 2){
 				if (!gamestate[7]) {gamestate[7] = user;
 				broken++;
 				break;
 				}
 			}
-			if (getbtns() == 1) {
+			else if (getbtns() == 1) {
 				if (!gamestate[8]){ gamestate[8] = user;
 				broken++;
 				break;
