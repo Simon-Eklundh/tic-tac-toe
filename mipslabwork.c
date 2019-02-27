@@ -220,7 +220,7 @@ void labwork(void) {
 	
 		if (getsw() == 8) {
 			row = 1
-			if(!gamestate[getbtns()] && (getbtns() == 1 || getbtns() % 2 == 0){ gamestate[getbtns] = user;
+			if(!gamestate[getbtns()] && (getbtns() == 1 || getbtns() % 2 == 0)){ gamestate[getbtns] = user;
 			broken++;
 			break;
 			}
@@ -261,7 +261,7 @@ void labwork(void) {
 		
 		else if (getsw() == 4) {
 			row = 2;
-			if(!gamestate[getbtns+4]){ gamestate[getbtns+4] = user;
+			if(!gamestate[getbtns+4]&& (getbtns() == 1 || getbtns() % 2 == 0)){ gamestate[getbtns+4] = user;
 			broken++;
 			break;
 			}
@@ -295,7 +295,7 @@ void labwork(void) {
 	//	if(!gamestate[i]) gamestate[i] = user;
 		else if (getsw() == 2) {
 			row == 3;
-			if(!gamestate[getbtns+8]){ gamestate[getbtns+8] = user;
+			if(!gamestate[getbtns+8]&& (getbtns() == 1 || getbtns() % 2 == 0)){ gamestate[getbtns+8] = user;
 			broken++;
 			break;
 			}
@@ -324,7 +324,7 @@ void labwork(void) {
 			
 		}
 		else if (getsw() == 1){
-			if(!gamestate[getbtns+12]){ gamestate[getbtns+12] = user;
+			if(!gamestate[getbtns+12]&& (getbtns() == 1 || getbtns() % 2 == 0)){ gamestate[getbtns+12] = user;
 			broken++;
 			break;
 			}
