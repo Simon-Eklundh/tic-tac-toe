@@ -283,7 +283,7 @@ void labwork(void) {
 					broken++;
 					break;
 				}
-			} */ 
+			} 
 			
 			display_string (3, "Row 2");
 			display_update();
@@ -347,7 +347,7 @@ void labwork(void) {
 				broken++;
 				break;
 				}
-			} */
+			} 
 			display_string (3, "Row 4");
 			display_update();
 			delay(100);
