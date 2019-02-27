@@ -217,10 +217,10 @@ void update_gamestate(int gamestate[]){
 void labwork(void) {
 	int broken = 0;
 	
-	while(1){
+	/* while(1){
 		int test = getbtns();
 		display_debug(&test);
-	}
+	} */
 	while(1){	
 	
 	
