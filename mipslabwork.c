@@ -220,12 +220,8 @@ void labwork(void) {
 	
 	
 		if (getsw() == 8) {
-			row = 1;
-			if(!gamestate[getbtns()] && (getbtns() == 1 || getbtns() % 2 == 0)){ gamestate[getbtns()] = user;
-			broken++;
-			break;
-			}
-			/* row = 1;
+			
+			 row = 1;
 			if(getbtns() == 8){
 				if(!gamestate[0]){
 					gamestate[0] = user;
@@ -247,13 +243,13 @@ void labwork(void) {
 				}
 			}
 			else if (getbtns() == 1) {
-				if (!gamestate[2]) {
-					gamestate[2] = user;
+				if (!gamestate[3]) {
+					gamestate[3] = user;
 					broken++;
 					break;
 				}
 			}
-		*/	
+			
 		display_string (3, "Row 1");	
 		display_update();
 		delay(100);
@@ -262,28 +258,28 @@ void labwork(void) {
 		
 		else if (getsw() == 4) {
 			row = 2;
-			if(!gamestate[getbtns()+4]&& (getbtns() == 1 || getbtns() % 2 == 0)){ gamestate[getbtns()+4] = user;
-			broken++;
-			break;
-			}
-			/* 
-			if (getbtns() == 4){
-				if (!gamestate[3]){
+			if(getbtns() == 8){
+				if (gamestate[3]){
 					gamestate[3] = user;
 					broken++;
 					break;
-				}
-			}
-			else if (getbtns() == 2){
+			else if (getbtns() == 4){
 				if (!gamestate[4]){
 					gamestate[4] = user;
 					broken++;
 					break;
 				}
 			}
-			else if (getbtns() == 1) {
+			else if (getbtns() == 2){
 				if (!gamestate[5]){
 					gamestate[5] = user;
+					broken++;
+					break;
+				}
+			}
+			else if (getbtns() == 1) {
+				if (!gamestate[6]){
+					gamestate[6] = user;
 					broken++;
 					break;
 				}
@@ -296,40 +292,67 @@ void labwork(void) {
 	//	if(!gamestate[i]) gamestate[i] = user;
 		else if (getsw() == 2) {
 			row == 3;
-			if(!gamestate[getbtns()+8]&& (getbtns() == 1 || getbtns() % 2 == 0)){ gamestate[getbtns()+8] = user;
-			broken++;
-			break;
-			}
-			/* if (getbtns() == 4){
-				if (!gamestate[6]){ gamestate[6] = user;
+			if(getbtns() == 8) {
+				if(!gamestate[6]) {
+					gamestate[6] = user;
+					broken++;
+				break;}
+			else if (getbtns() == 4){
+				if (!gamestate[7]){ gamestate[7] = user;
 				broken++;
 			
 				break;
 				}
 			}
 			else if (getbtns() == 2){
-				if (!gamestate[7]) {gamestate[7] = user;
+				if (!gamestate[8]) {gamestate[8] = user;
 				broken++;
 				break;
 				}
 			}
 			else if (getbtns() == 1) {
-				if (!gamestate[8]){ gamestate[8] = user;
+				if (!gamestate[9]){ gamestate[9] = user;
 				broken++;
 				break;
 				}
-			} */
+			} 
 			display_string (3, "Row 3");
 			display_update();
 			delay(100);
 			
 		}
+		}
 		else if (getsw() == 1){
 			row = 4;
-			if(!gamestate[getbtns()+12]&& (getbtns() == 1 || getbtns() % 2 == 0)){ gamestate[getbtns()+12] = user;
-			broken++;
-			break;
+			if(getbtns() == 8) {
+				if(!gamestate[12]) {
+					gamestate[12] = user;
+					broken++;
+				break;}
+			else if (getbtns() == 4){
+				if (!gamestate[13]){ gamestate[13] = user;
+				broken++;
+			
+				break;
+				}
 			}
+			else if (getbtns() == 2){
+				if (!gamestate[14]) {gamestate[14] = user;
+				broken++;
+				break;
+				}
+			}
+			else if (getbtns() == 1) {
+				if (!gamestate[15]){ gamestate[15] = user;
+				broken++;
+				break;
+				}
+			} */
+			display_string (3, "Row 4");
+			display_update();
+			delay(100);
+			
+		}
 		}
 		if(broken){
 			broken = 0;
