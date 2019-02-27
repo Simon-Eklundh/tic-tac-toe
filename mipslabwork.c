@@ -265,7 +265,7 @@ void labwork(void) {
 		else if (getsw() == 4) {
 			row = 2;
 			if(getbtns() == 8){
-				if (gamestate[4]){
+				if (!gamestate[4]){
 					gamestate[4] = user;
 					broken++;
 					break;
