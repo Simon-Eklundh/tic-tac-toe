@@ -228,6 +228,7 @@ void labwork(void) {
 					broken++;
 					break;
 				}
+			}
 			else if (getbtns() == 4){
 				if (!gamestate[1]){
 					gamestate[1] = user;
@@ -255,7 +256,7 @@ void labwork(void) {
 		delay(100);
 			
 		}
-		}
+		
 		else if (getsw() == 4) {
 			row = 2;
 			if(getbtns() == 8){
@@ -332,6 +333,7 @@ void labwork(void) {
 					gamestate[12] = user;
 					broken++;
 				break;}
+			}
 			else if (getbtns() == 4){
 				if (!gamestate[13]){ gamestate[13] = user;
 				broken++;
@@ -356,7 +358,7 @@ void labwork(void) {
 			delay(100);
 			
 		}
-		}
+		
 		if(broken){
 			broken = 0;
 			

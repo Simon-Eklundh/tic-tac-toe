@@ -24,10 +24,10 @@ void preset_gameboard(void){
 	display_update();
 	delay(2000);
 	
-	display_string( 0 , "_|_|_");
-	display_string( 1 , "_|_|_");
-	display_string( 2 , "_|_|_");
-	display_string(3 ,  " | | ");
+	display_string( 0 , "|_|_|_|_|");
+	display_string( 1 , "|_|_|_|_|");
+	display_string( 2 , "|_|_|_|_|");
+	display_string(3 ,  "| | | | |");
 	display_update();
 	
 }
