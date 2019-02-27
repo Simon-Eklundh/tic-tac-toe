@@ -131,7 +131,7 @@ int colwin(int gamestate[]){
 	int i;
 	for( i = 0; i < 4; i++){
 		if(gamestate[i] == 0) continue;
-	else if(gamestate[i] == gamestate[i+3] && gamestate[i] == gamestate[i+6] && gamestate[i] == gamestate[i+9]){
+	else if(gamestate[i] == gamestate[i+4] && gamestate[i] == gamestate[i+8] && gamestate[i] == gamestate[i+12]){
 			display_winner(gamestate[i]);
 			return 1;
 
