@@ -16,7 +16,7 @@ int getsw (void){
 	int buttonstatus = PORTD >> 5;
 	int mask = 0x7;
 	buttonstatus = buttonstatus & mask;
-	buttonstatus = (buttonstatus << 1) && ((PORTF >> 1)& 1);
+	buttonstatus = (buttonstatus << 1) & ((PORTF >> 1)& 0x1);
 	return buttonstatus;
 }
 
