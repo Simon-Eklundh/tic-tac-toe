@@ -216,6 +216,9 @@ void update_gamestate(int gamestate[]){
 
 void labwork(void) {
 	int broken = 0;
+	int test = PORTF >> 1 & 0x1;
+	while(1){
+		display_debug(&test);
 	while(1){	
 	
 	
