@@ -259,27 +259,27 @@ void labwork(void) {
 		else if (getsw() == 4) {
 			row = 2;
 			if(getbtns() == 8){
-				if (gamestate[3]){
-					gamestate[3] = user;
-					broken++;
-					break;
-			else if (getbtns() == 4){
-				if (!gamestate[4]){
+				if (gamestate[4]){
 					gamestate[4] = user;
 					broken++;
 					break;
-				}
-			}
-			else if (getbtns() == 2){
+			else if (getbtns() == 4){
 				if (!gamestate[5]){
 					gamestate[5] = user;
 					broken++;
 					break;
 				}
 			}
-			else if (getbtns() == 1) {
+			else if (getbtns() == 2){
 				if (!gamestate[6]){
 					gamestate[6] = user;
+					broken++;
+					break;
+				}
+			}
+			else if (getbtns() == 1) {
+				if (!gamestate[7]){
+					gamestate[7] = user;
 					broken++;
 					break;
 				}
@@ -293,25 +293,25 @@ void labwork(void) {
 		else if (getsw() == 2) {
 			row == 3;
 			if(getbtns() == 8) {
-				if(!gamestate[6]) {
-					gamestate[6] = user;
+				if(!gamestate[8]) {
+					gamestate[8] = user;
 					broken++;
 				break;}
 			else if (getbtns() == 4){
-				if (!gamestate[7]){ gamestate[7] = user;
+				if (!gamestate[9]){ gamestate[9] = user;
 				broken++;
 			
 				break;
 				}
 			}
 			else if (getbtns() == 2){
-				if (!gamestate[8]) {gamestate[8] = user;
+				if (!gamestate[10]) {gamestate[10] = user;
 				broken++;
 				break;
 				}
 			}
 			else if (getbtns() == 1) {
-				if (!gamestate[9]){ gamestate[9] = user;
+				if (!gamestate[11]){ gamestate[11] = user;
 				broken++;
 				break;
 				}
