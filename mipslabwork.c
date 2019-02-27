@@ -23,7 +23,7 @@
 #define DISPLAY_RESET_MASK 0x200
 
 //global variables
-int gamestate[9];
+int gamestate[16];
 int row = 1;
 int user = 1;
 int mytime = 0x0;
@@ -69,12 +69,7 @@ void timer(void) {
     T2CONSET = 0x8000;
 
     return;
-}
-/*
-void set_temp(number, numstring){
-	time = number;
-	time = numstring;
-}*/
+
 /* Lab-specific initialization goes here */
 
 
@@ -96,11 +91,11 @@ void labinit(void) {
 
 
 void set_line(int gamestate[], int line){
-	char row[3];
+	char row[4];
 	int i;
-	int j = (3*line);
+	int j = (4*line);
 	
-	for(i = 0; i < 3; i++){
+	for(i = 0; i < 4; i++){
 		
 		switch (gamestate[j]){
 		case 0 :
@@ -117,7 +112,7 @@ void set_line(int gamestate[], int line){
 		j++;
 	}
 	
-	char theline[] = {row[0], '|', row[1], '|', row[2]};
+	char theline[] = {row[0], '|', row[1], '|', row[2], '|', row[3], '|'};
 	display_string(line, theline);
 	
 	return;
@@ -133,9 +128,9 @@ display_winner(int winner){
 
 int colwin(int gamestate[]){
 	int i;
-	for( i = 0; i < 3; i++){
+	for( i = 0; i < 4; i++){
 		if(gamestate[i] == 0) continue;
-		else if(gamestate[i] == gamestate[i+3] && gamestate[i] == gamestate[i+6]){
+	else if(gamestate[i] == gamestate[i+3] && gamestate[i] == gamestate[i+6] && gamestate[i] == gamestate[i+9]){
 			display_winner(gamestate[i]);
 			return 1;
 
@@ -147,9 +142,9 @@ int colwin(int gamestate[]){
 }
 int rowwin(int gamestate[]){
 	int i;
-	for( i = 0; i < 7; i+=3){
+	for( i = 0; i < 13; i+=4){
 		if(gamestate[i] == 0) continue;
-		else if(gamestate[i] == gamestate[i+1] && gamestate[i] == gamestate[i+2]){
+		else if(gamestate[i] == gamestate[i+1] && gamestate[i] == gamestate[i+2] && gamestate[i] == gamestate[i+3]){
 			display_winner(gamestate[i]);
 			return 1;
 			
@@ -161,15 +156,15 @@ int rowwin(int gamestate[]){
 int diagwin(int gamestate[]){
 	
 	
-		if(gamestate[0] == 0 || gamestate[2] == 0) return 0;
-		if(gamestate[0] == gamestate[4] && gamestate[0] == gamestate[8]){
+		if(gamestate[0] == 0 || gamestate[3] == 0) return 0;
+		if(gamestate[0] == gamestate[5] && gamestate[0] == gamestate[10] && gamestate[0] == gamestate[15]){
 			
 			display_winner(gamestate[0]);
 		return 1;}
 		
-		else if(gamestate[2] == gamestate[4] && gamestate[2] == gamestate[6])
+		else if(gamestate[3] == gamestate[6] && gamestate[3] == gamestate[9] && gamestate[3] == gamestate[12])
 			{
-			display_winner(gamestate[2]);
+			display_winner(gamestate[3]);
 		return 1;}
 		
 		
@@ -180,7 +175,7 @@ int diagwin(int gamestate[]){
 int is_game_won(int gamestate[]){
 	int i;
 	int count = 0;
-	for (i=0;i<9; i++){
+	for (i=0;i<16; i++){
 	if (!gamestate[i]) {
 		count = 0;
 		break;
@@ -203,6 +198,8 @@ int is_game_won(int gamestate[]){
 }
 void update_gamestate(int gamestate[]){
 	int line = 0;
+	set_line(gamestate, line);
+	line++;
 	set_line(gamestate, line);
 	line++;
 	set_line(gamestate, line);
@@ -322,16 +319,8 @@ void labwork(void) {
 	delay(100);
 	update_gamestate(gamestate);
 	
-	//delay(100);
-	
-	/* if(is_game_won(gamestate)){
-		while(1){
-	}} */
 	is_game_won(gamestate);
-	//if(rounds == 9 && !is_game_won(gamestate))
-	//	display_winner(3);
-    
-    
+	
 	
 
    display_update();

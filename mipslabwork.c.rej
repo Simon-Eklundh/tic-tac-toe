@@ -1,0 +1,18 @@
+diff a/mipslabwork.c b/mipslabwork.c	(rejected hunks)
+@@ -228,14 +228,14 @@
+ 					break;
+ 				}
+ 			}
+-			if (getbtns() == 2){
++			else if (getbtns() == 2){
+ 				if (!gamestate[1]){
+ 					gamestate[1] = user;
+ 					broken++;
+ 					break;
+ 				}
+ 			}
+-			if (getbtns() == 1) {
++			else if (getbtns() == 1) {
+ 				if (!gamestate[2]) {
+ 					gamestate[2] = user;
+ 					broken++;
