@@ -156,13 +156,13 @@ int rowwin(int gamestate[]){
 int diagwin(int gamestate[]){
 	
 	
-		if(gamestate[0] == 0 || gamestate[3] == 0) return 0;
-		if(gamestate[0] == gamestate[5] && gamestate[0] == gamestate[10] && gamestate[0] == gamestate[15]){
+		
+		if(gamestate[0] && gamestate[0] == gamestate[5] && gamestate[0] == gamestate[10] && gamestate[0] == gamestate[15]){
 			
 			display_winner(gamestate[0]);
 		return 1;}
 		
-		else if(gamestate[3] == gamestate[6] && gamestate[3] == gamestate[9] && gamestate[3] == gamestate[12])
+		else if(gamestate[3] && gamestate[3] == gamestate[6] && gamestate[3] == gamestate[9] && gamestate[3] == gamestate[12])
 			{
 			display_winner(gamestate[3]);
 		return 1;}
@@ -216,18 +216,31 @@ void update_gamestate(int gamestate[]){
 void labwork(void) {
 	int broken = 0;
 	while(1){	
+	
+	
 		if (getsw() == 8) {
-			row == 1;
-			if (getbtns() == 4){
-				if (!gamestate[0]){
+			row = 1
+			if(!gamestate[getbtns()] && (getbtns() == 1 || getbtns() % 2 == 0){ gamestate[getbtns] = user;
+			broken++;
+			break;
+			}
+			/* row = 1;
+			if(getbtns() == 8){
+				if(!gamestate[0]){
 					gamestate[0] = user;
+					broken++;
+					break;
+				}
+			else if (getbtns() == 4){
+				if (!gamestate[1]){
+					gamestate[1] = user;
 					broken++;
 					break;
 				}
 			}
 			else if (getbtns() == 2){
-				if (!gamestate[1]){
-					gamestate[1] = user;
+				if (!gamestate[2]){
+					gamestate[2] = user;
 					broken++;
 					break;
 				}
@@ -239,15 +252,20 @@ void labwork(void) {
 					break;
 				}
 			}
-			
+		*/	
 		display_string (3, "Row 1");	
 		display_update();
 		delay(100);
 			
 		}
+		
 		else if (getsw() == 4) {
 			row = 2;
-			
+			if(!gamestate[getbtns+4]){ gamestate[getbtns+4] = user;
+			broken++;
+			break;
+			}
+			/* 
 			if (getbtns() == 4){
 				if (!gamestate[3]){
 					gamestate[3] = user;
@@ -268,7 +286,7 @@ void labwork(void) {
 					broken++;
 					break;
 				}
-			}
+			} */ 
 			
 			display_string (3, "Row 2");
 			display_update();
@@ -277,8 +295,11 @@ void labwork(void) {
 	//	if(!gamestate[i]) gamestate[i] = user;
 		else if (getsw() == 2) {
 			row == 3;
-			
-			if (getbtns() == 4){
+			if(!gamestate[getbtns+8]){ gamestate[getbtns+8] = user;
+			broken++;
+			break;
+			}
+			/* if (getbtns() == 4){
 				if (!gamestate[6]){ gamestate[6] = user;
 				broken++;
 			
@@ -296,13 +317,18 @@ void labwork(void) {
 				broken++;
 				break;
 				}
-			}
+			} */
 			display_string (3, "Row 3");
 			display_update();
 			delay(100);
 			
 		}
-		
+		else if (getsw() == 1){
+			if(!gamestate[getbtns+12]){ gamestate[getbtns+12] = user;
+			broken++;
+			break;
+			}
+		}
 		if(broken){
 			broken = 0;
 			

@@ -26,8 +26,8 @@ void preset_gameboard(void){
 	
 	display_string( 0 , "_|_|_");
 	display_string( 1 , "_|_|_");
-	display_string( 2 , " | | ");
-	display_string(3 , "row: 1 player: X");
+	display_string( 2 , "_|_|_");
+	display_string(3 ,  " | | ");
 	display_update();
 	
 }
