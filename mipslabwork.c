@@ -25,8 +25,12 @@
 //global variables
 int gamestate[16];
 int row = 1;
+int xscore = 0;
+int oscore = 0;
+int draws = 0;
 int user = 1;
 int mytime = 0x0;
+char theline3[17];
 void light(void) {
     static int counter = 1;
     volatile int *pointer = (volatile int *) 0xbf886110;
@@ -92,7 +96,7 @@ void labinit(void) {
 
 
 void set_line(int gamestate[], int line){
-	char row[4];
+	char rows[4];
 	int i;
 	int j = (4*line);
 	
@@ -100,30 +104,67 @@ void set_line(int gamestate[], int line){
 		
 		switch (gamestate[j]){
 		case 0 :
-		row[i] = '_';
+		rows[i] = '_';
 		break;
 		case 1 :
-		row[i] = 'x';
+		rows[i] = 'x';
 		break;
 		case 2 :
-		row[i] = 'o';
+		rows[i] = 'o';
 		break;
 		
 		}
 		j++;
 	}
+	char theline43[] = {'|',rows[0], '|', rows[1], '|', rows[2], '|', rows[3], '|', ' ', 'r', 'o', 'w', ' ', row+'0', ' ', ' '};
+	if (line == 0){
+		char theline0[] = {'|',rows[0], '|', rows[1], '|', rows[2], '|', rows[3], '|', ' ', 'x', ':', ' ', xscore+'0', ' ', ' '};
+		display_string(line, theline0);
+	}
+	if (line == 1){
+		char theline1[] = {'|',rows[0], '|', rows[1], '|', rows[2], '|', rows[3], '|', ' ', 'o', ':', ' ', oscore+'0', ' ', ' '};
+		display_string(line, theline1);
+	}
+	if (line == 2){
+		char theline2[] = {'|',rows[0], '|', rows[1], '|', rows[2], '|', rows[3], '|', ' ', '-', ':', ' ', draws+'0', ' ', ' '};
+		display_string(line, theline2);
+	}
+	if (line == 3){
+		
+		for(i = 0; i < 17; i++){
+			theline3[i] = theline43[i];
+		}
+		
+		display_string(line, theline3);
+	}
 	
-	char theline[] = {'|',row[0], '|', row[1], '|', row[2], '|', row[3], '|'};
-	display_string(line, theline);
 	
 	return;
 
 }
 display_winner(int winner){
-	if(winner == 1) display_string(3, "the winner was x");
-	else if(winner == 2) display_string(3, "the winner was o");
-	else display_string(3, "draw");
-	delay(1000000);
+	
+	int i;
+	for (i = 0; i < 4; i++)
+		display_string(i, "");
+	
+	if(winner == 1){
+		display_string(1, "the winner was x");
+		xscore++;
+	}
+	else if(winner == 2){
+		display_string(1, "the winner was o");
+		oscore++;
+	}
+	else {
+		display_string(1, "draw");
+		draws++;
+	}
+	delay(4000);
+	
+	for(i = 0; i < 16; i++) gamestate[i]=0;
+	//could add reset for user, but want loser to start next.
+	//if(user == 2) user = 1;
 
 }
 
@@ -198,14 +239,9 @@ int is_game_won(int gamestate[]){
 	
 }
 void update_gamestate(int gamestate[]){
-	int line = 0;
-	set_line(gamestate, line);
-	line++;
-	set_line(gamestate, line);
-	line++;
-	set_line(gamestate, line);
-	line++;
-	set_line(gamestate, line);
+	int line;
+	for (line = 0; line < 4; line++)
+		set_line(gamestate, line);
 	
 	
 }
@@ -216,7 +252,8 @@ void update_gamestate(int gamestate[]){
 
 void labwork(void) {
 	int broken = 0;
-	
+	update_gamestate(gamestate);
+	display_update();
 	/* while(1){
 		int test = getbtns();
 		display_debug(&test);
@@ -227,6 +264,7 @@ void labwork(void) {
 		if (getsw() == 8) {
 			
 			 row = 1;
+			 
 			if(getbtns() == 8){
 				if(!gamestate[0]){
 					gamestate[0] = user;
@@ -256,9 +294,7 @@ void labwork(void) {
 				}
 			}
 			
-		display_string (3, "Row 1");	
-		display_update();
-		delay(100);
+		
 			
 		}
 		
@@ -293,13 +329,11 @@ void labwork(void) {
 				}
 			} 
 			
-			display_string (3, "Row 2");
-			display_update();
-			delay(100);
+		
 		}
 	//	if(!gamestate[i]) gamestate[i] = user;
 		else if (getsw() == 2) {
-			row == 3;
+			row = 3;
 			if(getbtns() == 8) {
 				if(!gamestate[8]) {
 					gamestate[8] = user;
@@ -325,9 +359,6 @@ void labwork(void) {
 				break;
 				}
 			} 
-			display_string (3, "Row 3");
-			display_update();
-			delay(100);
 			
 		}
 		
@@ -358,12 +389,13 @@ void labwork(void) {
 				break;
 				}
 			} 
-			display_string (3, "Row 4");
-			display_update();
-			delay(100);
+			
 			
 		}
-		
+			theline3[14] = row+'0';
+			 display_string(3, theline3);
+			 display_update();
+			 delay(100);
 		if(broken){
 			broken = 0;
 			
@@ -378,7 +410,7 @@ void labwork(void) {
 	else if(user == 2) user = 1;
 	//display_debug(&user);
 	delay(100);
-	update_gamestate(gamestate);
+	//update_gamestate(gamestate);
 	display_update();
 	
 	is_game_won(gamestate);
