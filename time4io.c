@@ -13,9 +13,10 @@ int getsw (void){
 }
 
 	int getbtns(void){
-	int buttonstatus = PORTD >> 4;
-	int mask = 0xF;
+	int buttonstatus = PORTD >> 5;
+	int mask = 0x7;
 	buttonstatus = buttonstatus & mask;
+	buttonstatus = (buttonstatus << 1) & ((PORTF >> 1)& 1)
 	return buttonstatus;
 }
 
