@@ -380,7 +380,7 @@ void labwork(void) {
    display_update();
 
 	
-			}
+			
     return;
 
 }
