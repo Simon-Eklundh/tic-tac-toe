@@ -113,7 +113,7 @@ void set_line(int gamestate[], int line){
 		j++;
 	}
 	
-	char theline[] = {row[0], '|', row[1], '|', row[2], '|', row[3], '|'};
+	char theline[] = {'|',row[0], '|', row[1], '|', row[2], '|', row[3], '|'};
 	display_string(line, theline);
 	
 	return;
@@ -123,7 +123,7 @@ display_winner(int winner){
 	if(winner == 1) display_string(3, "the winner was x");
 	else if(winner == 2) display_string(3, "the winner was o");
 	else display_string(3, "draw");
-	delay(10000);
+	delay(1000000);
 
 }
 
@@ -379,12 +379,13 @@ void labwork(void) {
 	//display_debug(&user);
 	delay(100);
 	update_gamestate(gamestate);
+	display_update();
 	
 	is_game_won(gamestate);
 	
 	
 
-   display_update();
+   
 
 	
 			
