@@ -219,6 +219,7 @@ void labwork(void) {
 	int test = PORTF >> 1 & 0x1;
 	while(1){
 		display_debug(&test);
+	}
 	while(1){	
 	
 	
@@ -388,7 +389,7 @@ void labwork(void) {
 			
     return;
 
-}
+	}
 
 //display_debug(&test);  used to print adress+ value of var on chipkit
   
