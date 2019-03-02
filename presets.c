@@ -20,7 +20,7 @@ void preset_gameboard(void){
 	
 	display_string(0, "press reset");
 	display_string(1, "button to");
-	display_string(2, "replay");
+	display_string(2, "reset wins etc");
 	display_update();
 	delay(2000);
 	
