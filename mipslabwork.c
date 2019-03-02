@@ -254,6 +254,7 @@ void labwork(void) {
 	int broken = 0;
 	update_gamestate(gamestate);
 	display_update();
+	delay(100);
 	/* while(1){
 		int test = getbtns();
 		display_debug(&test);
@@ -409,9 +410,8 @@ void labwork(void) {
 	if(user == 1) user = 2;
 	else if(user == 2) user = 1;
 	//display_debug(&user);
-	delay(100);
-	//update_gamestate(gamestate);
-	display_update();
+	
+
 	
 	is_game_won(gamestate);
 	
