@@ -23,14 +23,21 @@
 #define DISPLAY_RESET_MASK 0x200
 
 //global variables
+// Simon's variables
 int gamestate[16];
 int row = 1;
+int user = 1;
+
+// Joel's variables
 int xscore = 0;
 int oscore = 0;
 int draws = 0;
-int user = 1;
-int mytime = 0x0;
 char theline3[17];
+
+
+int mytime = 0x0;
+
+// not used currently
 void light(void) {
     static int counter = 1;
     volatile int *pointer = (volatile int *) 0xbf886110;
@@ -94,7 +101,7 @@ void labinit(void) {
     return;
 }
 
-
+// Simon's
 void set_line(int gamestate[], int line){
 	char rows[4];
 	int i;
@@ -116,6 +123,7 @@ void set_line(int gamestate[], int line){
 		}
 		j++;
 	}
+	//Joel's
 	char theline43[] = {'|',rows[0], '|', rows[1], '|', rows[2], '|', rows[3], '|', ' ', 'r', 'o', 'w', ' ', row+'0', ' ', ' '};
 	if (line == 0){
 		char theline0[] = {'|',rows[0], '|', rows[1], '|', rows[2], '|', rows[3], '|', ' ', 'x', ':', ' ', xscore+'0', ' ', ' '};
@@ -142,6 +150,7 @@ void set_line(int gamestate[], int line){
 	return;
 
 }
+//joint effort
 display_winner(int winner){
 	
 	int i;
@@ -167,7 +176,7 @@ display_winner(int winner){
 	//if(user == 2) user = 1;
 
 }
-
+//Simon's
 int colwin(int gamestate[]){
 	int i;
 	for( i = 0; i < 4; i++){
@@ -182,6 +191,7 @@ int colwin(int gamestate[]){
 	}
 	return 0;
 }
+//simon's
 int rowwin(int gamestate[]){
 	int i;
 	for( i = 0; i < 13; i+=4){
@@ -195,6 +205,7 @@ int rowwin(int gamestate[]){
 	}
 	return 0;
 }
+//simon's
 int diagwin(int gamestate[]){
 	
 	
@@ -213,7 +224,7 @@ int diagwin(int gamestate[]){
 		return 0;
 	
 }
-
+//simon's
 int is_game_won(int gamestate[]){
 	int i;
 	int count = 0;
@@ -238,6 +249,7 @@ int is_game_won(int gamestate[]){
 	
 	
 }
+// Joel improved shitty code from Simon
 void update_gamestate(int gamestate[]){
 	int line;
 	for (line = 0; line < 4; line++)
@@ -251,6 +263,7 @@ void update_gamestate(int gamestate[]){
 
 
 void labwork(void) {
+	//simon wrote, Joel helped debug
 	int broken = 0;
 	update_gamestate(gamestate);
 	display_update();
