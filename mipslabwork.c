@@ -228,7 +228,7 @@ int is_game_won(int gamestate[]){
 	if(colwin(gamestate))return 1;
 	else if(rowwin(gamestate)) return 1;
 	else if(diagwin(gamestate)) return 1;
-	else if(count == 1) {display_winner(42); delay(10000);}
+	else if(count == 1) display_winner(42);
 	
 	
 	else return 0;
