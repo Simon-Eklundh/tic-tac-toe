@@ -160,6 +160,7 @@ display_winner(int winner){
 		display_string(1, "draw");
 		draws++;
 	}
+	display_update();
 	delay(4000);
 	
 	for(i = 0; i < 16; i++) gamestate[i]=0;
@@ -411,9 +412,11 @@ void labwork(void) {
 	//display_debug(&user);
 	delay(100);
 	//update_gamestate(gamestate);
-	display_update();
+	
 	
 	is_game_won(gamestate);
+	
+	
 	
 	
 
