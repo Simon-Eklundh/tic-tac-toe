@@ -4,10 +4,10 @@
 #include <pic32mx.h>
 
 
-
+//simon's
 void preset_gameboard(void){
 	display_string(0, "welcome to");
-	display_string(1, "tic tac toe");
+	display_string(1, "four in a row");
 	display_string(2, "mate");
 	display_update();
 	delay(2000);
@@ -24,6 +24,7 @@ void preset_gameboard(void){
 	display_update();
 	delay(2000);
 	
+// joel added a column :)
 	display_string( 0 , "|_|_|_|_|");
 	display_string( 1 , "|_|_|_|_|");
 	display_string( 2 , "|_|_|_|_|");
