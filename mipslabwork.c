@@ -4,6 +4,8 @@
    Updated 2017-04-21 by F Lundevall
    This file should be changed by YOU! So you must
    add comment(s) here with your name(s) and date(s):
+   Simon Eklundh, 04/03-19
+   Joel Jonsson Rapp, 04/03-19
    This file modified 2017-04-31 by Ture Teknolog 
    For copyright and licensing, see file COPYING */
 
